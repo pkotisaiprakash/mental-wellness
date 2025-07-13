@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}Goals - Mental Wellness Portal{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white p-8 rounded-lg">
+        <h1 class="text-3xl font-bold mb-2">🎯 Wellness Goals</h1>
+        <p class="text-lg opacity-90">Set and track your mental wellness goals to build healthy habits and achieve personal growth.</p>
+    </div>
+
+    <!-- Add New Goal Form -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Add New Goal</h2>
+        <form method="POST" action="{{ url_for('add_goal') }}" class="space-y-4">
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Goal Title *</label>
+                <input type="text" id="title" name="title" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                       placeholder="e.g., Practice meditation daily">
+            </div>
+            
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                <textarea id="description" name="description" rows="3"
+                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                          placeholder="Describe your goal in detail..."></textarea>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                    <select id="category" name="category" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="general">General Wellness</option>
+                        <option value="mental-health">Mental Health</option>
+                        <option value="physical-health">Physical Health</option>
+                        <option value="social">Social Connections</option>
+                        <option value="academic">Academic</option>
+                        <option value="self-care">Self-Care</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="target_date" class="block text-sm font-medium text-gray-700 mb-2">Target Date</label>
+                    <input type="date" id="target_date" name="target_date"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+            </div>
+            
+            <button type="submit" 
+                    class="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition duration-300 font-semibold">
+                Add Goal
+            </button>
+        </form>
+    </div>
+
+    <!-- Goals List -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Your Goals</h2>
+        
+        {% if goals %}
+            <div class="space-y-6">
+                {% for goal in goals %}
+                <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition duration-300">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ goal.title }}</h3>
+                            {% if goal.description %}
+                                <p class="text-gray-600 mb-3">{{ goal.description }}</p>
+                            {% endif %}
+                            
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span class="flex items-center">
+                                    <span class="w-3 h-3 rounded-full mr-2 
+                                        {% if goal.category == 'mental-health' %}bg-purple-500
+                                        {% elif goal.category == 'physical-health' %}bg-blue-500
+                                        {% elif goal.category == 'social' %}bg-green-500
+                                        {% elif goal.category == 'academic' %}bg-yellow-500
+                                        {% elif goal.category == 'self-care' %}bg-pink-500
+                                        {% else %}bg-gray-500{% endif %}"></span>
+                                    {{ goal.category.replace('-', ' ').title() }}
+                                </span>
+                                
+                                {% if goal.target_date %}
+                                    <span class="flex items-center">
+                                        📅 {{ goal.target_date }}
+                                    </span>
+                                {% endif %}
+                                
+                                <span class="flex items-center">
+                                    📊 {{ goal.progress }}% Complete
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold
+                                {% if goal.status == 'active' %}bg-green-100 text-green-800
+                                {% elif goal.status == 'completed' %}bg-blue-100 text-blue-800
+                                {% else %}bg-gray-100 text-gray-800{% endif %}">
+                                {{ goal.status.title() }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="mb-4">
+                        <div class="flex justify-between text-sm text-gray-600 mb-1">
+                            <span>Progress</span>
+                            <span>{{ goal.progress }}%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full transition-all duration-300" 
+                                 style="width: {{ goal.progress }}%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Update -->
+                    <div class="flex items-center space-x-2">
+                        <input type="range" min="0" max="100" value="{{ goal.progress }}" 
+                               class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                               data-goal-id="{{ goal._id }}"
+                               onchange="updateProgress(this)">
+                        <button onclick="updateProgress(this.previousElementSibling)" 
+                                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300 text-sm">
+                            Update
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-12">
+                <div class="text-6xl mb-4">🎯</div>
+                <h3 class="text-xl font-semibold text-gray-600 mb-2">No goals set yet</h3>
+                <p class="text-gray-500 mb-6">Start your wellness journey by setting your first goal above!</p>
+                <div class="bg-gray-50 p-6 rounded-lg max-w-md mx-auto">
+                    <h4 class="font-semibold text-gray-800 mb-3">Goal Ideas:</h4>
+                    <ul class="text-sm text-gray-600 space-y-2 text-left">
+                        <li>• Practice 10 minutes of meditation daily</li>
+                        <li>• Exercise for 30 minutes, 3 times a week</li>
+                        <li>• Connect with a friend or family member weekly</li>
+                        <li>• Read a book for 20 minutes before bed</li>
+                        <li>• Practice gratitude by writing 3 things daily</li>
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Goal Tips -->
+    <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-6 rounded-lg">
+        <h3 class="text-xl font-bold mb-3">💡 Goal Setting Tips</h3>
+        <div class="space-y-2">
+            <p>• Make goals specific, measurable, and achievable</p>
+            <p>• Start small and build up gradually</p>
+            <p>• Track your progress regularly</p>
+            <p>• Celebrate small wins along the way</p>
+            <p>• Be flexible and adjust goals as needed</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function updateProgress(slider) {
+    const goalId = slider.getAttribute('data-goal-id');
+    const progress = slider.value;
+    
+    // Update the progress display
+    const progressText = slider.parentElement.previousElementSibling.querySelector('span:last-child');
+    progressText.textContent = progress + '%';
+    
+    // Update the progress bar
+    const progressBar = slider.parentElement.previousElementSibling.querySelector('.bg-green-500');
+    progressBar.style.width = progress + '%';
+    
+    // Send update to server
+    fetch('/update_goal_progress', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `goal_id=${goalId}&progress=${progress}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Progress updated successfully');
+        }
+    })
+    .catch(error => {
+        console.error('Error updating progress:', error);
+    });
+}
+</script>
+{% endblock %} 

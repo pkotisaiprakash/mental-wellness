@@ -1,0 +1,315 @@
+{% extends "base.html" %}
+
+{% block title %}Mental Wellness Videos - Mental Wellness Portal{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Header -->
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">📺 Mental Wellness Videos</h1>
+        <p class="text-lg text-gray-600">Curated video content to support your mental health journey</p>
+    </div>
+
+    <!-- Featured Videos Section -->
+    <div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">🌟 Featured Mental Wellness Videos</h2>
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            {% for video in videos[:2] %}
+            <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer" onclick="watchVideo('{{ loop.index0 }}')">
+                <div class="aspect-video bg-gray-200 flex items-center justify-center relative">
+                    <div class="text-center">
+                        <div class="text-6xl mb-2">{{ video.thumbnail }}</div>
+                        <p class="text-base text-gray-600">{{ video.category.title() }}</p>
+                    </div>
+                    <div class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
+                        {{ video.duration }}
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-xl mb-2">{{ video.title }}</h3>
+                    <p class="text-gray-700 mb-3">{{ video.description }}</p>
+                    <div class="flex items-center justify-between text-xs text-gray-500 mb-3">
+                        <span>{{ video.views }} views</span>
+                        <span>{{ video.likes }} likes</span>
+                    </div>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 font-semibold" onclick="event.stopPropagation(); watchVideo('{{ loop.index0 }}')">Watch</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Search and Filter Bar -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="flex flex-col md:flex-row gap-4">
+            <input type="text" id="searchInput" placeholder="Search videos..." 
+                   class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="categoryFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">All Categories</option>
+                <option value="mindfulness">Mindfulness</option>
+                <option value="sleep">Sleep</option>
+                <option value="resilience">Resilience</option>
+                <option value="anxiety">Anxiety</option>
+                <option value="self-care">Self-Care</option>
+                <option value="stress">Stress Management</option>
+            </select>
+            <select id="difficultyFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">All Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Video Grid (excluding featured) -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="videoGrid">
+        {% if videos|length > 2 %}
+            {% for video in videos[2:] %}
+            <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 video-card" 
+                 data-category="{{ video.category }}" data-difficulty="{{ video.difficulty }}" data-title="{{ video.title.lower() }}">
+                <!-- Video Thumbnail -->
+                <div class="aspect-video bg-gray-200 flex items-center justify-center relative group cursor-pointer" 
+                     onclick="watchVideo('{{ loop.index0 + 2 }}')">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">{{ video.thumbnail }}</div>
+                        <p class="text-sm text-gray-600">{{ video.category.title() }}</p>
+                    </div>
+                    <!-- Play Button Overlay -->
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                        <div class="bg-white bg-opacity-90 rounded-full p-3 group-hover:scale-110 transition duration-300">
+                            <svg class="w-6 h-6 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Duration Badge -->
+                    <div class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
+                        {{ video.duration }}
+                    </div>
+                </div>
+                
+                <!-- Video Info -->
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg mb-2 line-clamp-2">{{ video.title }}</h3>
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">{{ video.description }}</p>
+                    
+                    <!-- Video Stats -->
+                    <div class="flex items-center justify-between text-xs text-gray-500 mb-3">
+                        <span>{{ video.views }} views</span>
+                        <span>{{ video.likes }} likes</span>
+                    </div>
+                    
+                    <!-- Difficulty Badge -->
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs px-2 py-1 rounded 
+                            {% if video.difficulty == 'beginner' %}bg-green-100 text-green-800
+                            {% elif video.difficulty == 'intermediate' %}bg-blue-100 text-blue-800
+                            {% else %}bg-purple-100 text-purple-800{% endif %}">
+                            {{ video.difficulty.title() }}
+                        </span>
+                        <button onclick="watchVideo('{{ loop.index0 + 2 }}')" 
+                                class="bg-red-600 text-white px-3 py-1 rounded text-sm font-semibold hover:bg-red-700 transition duration-300">
+                            Watch
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <!-- Fallback content if no videos -->
+            <div class="col-span-full text-center py-12">
+                <div class="text-6xl mb-4">📺</div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Videos Coming Soon</h3>
+                <p class="text-gray-600">We're preparing amazing mental wellness content for you!</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- No Results Message -->
+    <div id="noResults" class="hidden text-center py-12">
+        <div class="text-6xl mb-4">🔍</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">No videos found</h3>
+        <p class="text-gray-600">Try adjusting your search or filter criteria</p>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="text-center">
+        <button id="loadMore" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+            Load More Videos
+        </button>
+    </div>
+</div>
+
+<!-- Video Player Modal -->
+<div id="videoModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-4xl w-full max-h-full overflow-hidden">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h3 id="modalTitle" class="text-lg font-semibold">Video Title</h3>
+            <button onclick="closeVideoModal()" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="aspect-video bg-gray-200 flex items-center justify-center relative">
+            <div id="videoPlayerContainer" class="w-full h-full flex items-center justify-center">
+                <!-- Placeholder, hidden when video loads -->
+                <div id="videoPlaceholder" class="text-center w-full">
+                    <div class="text-6xl mb-4">🎥</div>
+                    <p class="text-lg text-gray-600">Video Player</p>
+                    <p class="text-sm text-gray-500 mt-2">In a real application, this would embed an actual video player</p>
+                </div>
+                <iframe id="videoIframe" class="w-full h-full absolute top-0 left-0 hidden rounded-lg" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+            </div>
+        </div>
+        <div class="p-4">
+            <p id="modalDescription" class="text-gray-600 mb-4">Video description will appear here</p>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">
+                        👍 Like
+                    </button>
+                    <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">
+                        📤 Share
+                    </button>
+                </div>
+                <button onclick="closeVideoModal()" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
+
+<script>
+// Video data from Flask - Fixed syntax with fallback
+let videos = [];
+try {
+    videos = JSON.parse('{{ videos | tojson | safe }}');
+    console.log('Videos loaded:', videos.length);
+} catch (error) {
+    console.error('Error loading videos:', error);
+    videos = [];
+}
+
+// Filter and search functionality
+function filterVideos() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const categoryFilter = document.getElementById('categoryFilter').value;
+    const difficultyFilter = document.getElementById('difficultyFilter').value;
+    
+    const videoCards = document.querySelectorAll('.video-card');
+    let visibleCount = 0;
+    
+    videoCards.forEach(card => {
+        const title = card.dataset.title;
+        const category = card.dataset.category;
+        const difficulty = card.dataset.difficulty;
+        
+        const matchesSearch = title.includes(searchTerm);
+        const matchesCategory = !categoryFilter || category === categoryFilter;
+        const matchesDifficulty = !difficultyFilter || difficulty === difficultyFilter;
+        
+        if (matchesSearch && matchesCategory && matchesDifficulty) {
+            card.style.display = 'block';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    
+    // Show/hide no results message
+    const noResults = document.getElementById('noResults');
+    if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+    } else {
+        noResults.classList.add('hidden');
+    }
+}
+
+// Video player functionality
+function watchVideo(videoIndex) {
+    const video = videos[videoIndex];
+    if (!video) {
+        console.error('Video not found for index:', videoIndex);
+        return;
+    }
+    document.getElementById('modalTitle').textContent = video.title;
+    document.getElementById('modalDescription').textContent = video.description;
+    document.getElementById('videoModal').classList.remove('hidden');
+    // Show/hide video player
+    const iframe = document.getElementById('videoIframe');
+    const placeholder = document.getElementById('videoPlaceholder');
+    if (video.video_url) {
+        iframe.src = video.video_url + (video.video_url.includes('youtube.com') ? '?autoplay=1' : '');
+        iframe.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+    } else {
+        iframe.src = '';
+        iframe.classList.add('hidden');
+        placeholder.classList.remove('hidden');
+    }
+    document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+    document.getElementById('videoModal').classList.add('hidden');
+    // Reset video player
+    const iframe = document.getElementById('videoIframe');
+    iframe.src = '';
+    iframe.classList.add('hidden');
+    document.getElementById('videoPlaceholder').classList.remove('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, setting up event listeners');
+    
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const difficultyFilter = document.getElementById('difficultyFilter');
+    const videoModal = document.getElementById('videoModal');
+    const loadMore = document.getElementById('loadMore');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', filterVideos);
+        console.log('Search input listener added');
+    }
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', filterVideos);
+        console.log('Category filter listener added');
+    }
+    if (difficultyFilter) {
+        difficultyFilter.addEventListener('change', filterVideos);
+        console.log('Difficulty filter listener added');
+    }
+    
+    // Close modal when clicking outside
+    if (videoModal) {
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+    }
+    
+    // Load more functionality
+    if (loadMore) {
+        loadMore.addEventListener('click', function() {
+            alert('Videos will be uploaded soon!');
+        });
+    }
+});
+</script>
+{% endblock %} 

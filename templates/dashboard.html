@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Mental Wellness Portal{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Welcome Section -->
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8 rounded-lg">
+        <h1 class="text-3xl font-bold mb-2">Welcome back, {{ current_user.name }}! 👋</h1>
+        <p class="text-lg opacity-90">How are you feeling today? We're here to support your mental wellness journey.</p>
+    </div>
+
+    <!-- Quick Actions Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="{{ url_for('contact_counselor') }}" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-center">
+            <div class="text-4xl mb-4">💬</div>
+            <h3 class="text-lg font-semibold mb-2">Talk to Counselor</h3>
+            <p class="text-gray-600 text-sm">Connect with a mental health professional</p>
+        </a>
+        
+        <a href="{{ url_for('resources') }}" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-center">
+            <div class="text-4xl mb-4">📚</div>
+            <h3 class="text-lg font-semibold mb-2">Browse Resources</h3>
+            <p class="text-gray-600 text-sm">Access helpful articles and guides</p>
+        </a>
+        
+        <a href="{{ url_for('mood_tracker') }}" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-center">
+            <div class="text-4xl mb-4">📊</div>
+            <h3 class="text-lg font-semibold mb-2">Mood Tracker</h3>
+            <p class="text-gray-600 text-sm">Track your daily mood and progress</p>
+        </a>
+        
+        <a href="{{ url_for('goals') }}" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-center">
+            <div class="text-4xl mb-4">🎯</div>
+            <h3 class="text-lg font-semibold mb-2">Set Goals</h3>
+            <p class="text-gray-600 text-sm">Create wellness goals and track progress</p>
+        </a>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Feedback Form -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Share Your Feedback</h2>
+            <form method="POST" action="{{ url_for('submit_feedback') }}" class="space-y-4">
+                <div>
+                    <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                    <select id="category" name="category" required 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select a category</option>
+                        <option value="general">General Feedback</option>
+                        <option value="counseling">Counseling Services</option>
+                        <option value="resources">Resources</option>
+                        <option value="platform">Platform Experience</option>
+                        <option value="suggestion">Suggestion</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="rating" class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+                    <div class="flex space-x-2">
+                        <input type="radio" id="rating1" name="rating" value="1" class="sr-only">
+                        <label for="rating1" class="text-2xl cursor-pointer hover:text-yellow-400">⭐</label>
+                        
+                        <input type="radio" id="rating2" name="rating" value="2" class="sr-only">
+                        <label for="rating2" class="text-2xl cursor-pointer hover:text-yellow-400">⭐</label>
+                        
+                        <input type="radio" id="rating3" name="rating" value="3" class="sr-only">
+                        <label for="rating3" class="text-2xl cursor-pointer hover:text-yellow-400">⭐</label>
+                        
+                        <input type="radio" id="rating4" name="rating" value="4" class="sr-only">
+                        <label for="rating4" class="text-2xl cursor-pointer hover:text-yellow-400">⭐</label>
+                        
+                        <input type="radio" id="rating5" name="rating" value="5" class="sr-only">
+                        <label for="rating5" class="text-2xl cursor-pointer hover:text-yellow-400">⭐</label>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="feedback" class="block text-sm font-medium text-gray-700 mb-2">Your Feedback</label>
+                    <textarea id="feedback" name="feedback" rows="4" required
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              placeholder="Share your thoughts, suggestions, or experiences..."></textarea>
+                </div>
+                
+                <button type="submit" 
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+                    Submit Feedback
+                </button>
+            </form>
+        </div>
+
+        <!-- Wellness Tips & Resources -->
+        <div class="space-y-6">
+            <!-- Daily Wellness Tip -->
+            <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white p-6 rounded-lg">
+                <h3 class="text-xl font-bold mb-3">💡 Daily Wellness Tip</h3>
+                <p class="text-lg">Practice deep breathing exercises for 5 minutes daily. It can help reduce stress and improve focus.</p>
+            </div>
+
+            <!-- Quick Resources -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Quick Resources</h3>
+                <div class="space-y-3">
+                    <a href="#" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                        <span class="text-2xl mr-3">🧘</span>
+                        <div>
+                            <h4 class="font-semibold">Meditation Guide</h4>
+                            <p class="text-sm text-gray-600">Learn basic meditation techniques</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                        <span class="text-2xl mr-3">📝</span>
+                        <div>
+                            <h4 class="font-semibold">Journaling Prompts</h4>
+                            <p class="text-sm text-gray-600">Reflective writing exercises</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                        <span class="text-2xl mr-3">🏃</span>
+                        <div>
+                            <h4 class="font-semibold">Exercise Routines</h4>
+                            <p class="text-sm text-gray-600">Physical wellness activities</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Emergency Contacts -->
+            <div class="bg-red-50 border border-red-200 p-6 rounded-lg">
+                <h3 class="text-xl font-bold mb-4 text-red-800">🚨 Emergency Contacts</h3>
+                <div class="space-y-2 text-sm">
+                    <p><strong>National Suicide Prevention Lifeline:</strong> 988</p>
+                    <p><strong>Crisis Text Line:</strong> Text HOME to 741741</p>
+                    <p><strong>Emergency Services:</strong> 911</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Recent Activity</h2>
+        <div class="space-y-4">
+            <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                <div class="w-3 h-3 bg-green-500 rounded-full mr-4"></div>
+                <div>
+                    <p class="font-semibold">Welcome to Mental Wellness Portal</p>
+                    <p class="text-sm text-gray-600">You joined our community today</p>
+                </div>
+            </div>
+            <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                <div class="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                <div>
+                    <p class="font-semibold">Explore Resources</p>
+                    <p class="text-sm text-gray-600">Check out our mental health resources</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Simple star rating functionality
+document.querySelectorAll('input[name="rating"]').forEach((radio, index) => {
+    radio.addEventListener('change', function() {
+        const stars = document.querySelectorAll('label[for^="rating"]');
+        stars.forEach((star, starIndex) => {
+            if (starIndex <= index) {
+                star.style.color = '#FCD34D';
+            } else {
+                star.style.color = '#D1D5DB';
+            }
+        });
+    });
+});
+</script>
+{% endblock %} 

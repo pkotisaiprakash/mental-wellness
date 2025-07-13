@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Counselor & Support - Mental Wellness Portal{% endblock %}
+
+{% block content %}
+<!--<div class="max-w-6xl mx-auto">
+    Header Section
+    <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Contact Counselor & Support</h1>
+        <p class="text-lg text-gray-600">Connect with licensed mental health professionals and access government support resources</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+         Contact Form 
+        <div class="lg:col-span-2">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Send a Message to Counselor</h2>
+                
+                <form method="POST" class="space-y-6">
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="Brief description of your concern">
+                    </div>
+
+                    <div>
+                        <label for="urgency" class="block text-sm font-medium text-gray-700 mb-2">Urgency Level</label>
+                        <select id="urgency" name="urgency" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Select urgency level</option>
+                            <option value="low">Low - General questions or support</option>
+                            <option value="medium">Medium - Some concern, would like to discuss</option>
+                            <option value="high">High - Need to talk to someone soon</option>
+                            <option value="urgent">Urgent - Immediate support needed</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Your Message</label>
+                        <textarea id="message" name="message" rows="8" required
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                  placeholder="Please share your concerns, questions, or what you'd like to discuss. Be as detailed as you're comfortable with..."></textarea>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800 mb-2">📋 What to Include:</h4>
+                        <ul class="text-sm text-blue-700 space-y-1">
+                            <li>• What you're currently experiencing</li>
+                            <li>• How long you've been feeling this way</li>
+                            <li>• What you hope to achieve from counseling</li>
+                            <li>• Any specific questions you have</li>
+                        </ul>
+                    </div>
+
+                    <button type="submit" 
+                            class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold">
+                        Send Message to Counselor
+                    </button>
+                </form>
+            </div>-->
+
+            <!-- Government Support & Mental Health Helplines Section -->
+            <div class="bg-white p-8 rounded-lg shadow-md mt-8">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">🏛️ Government Support & Mental Health Helplines</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- National Crisis Resources -->
+                    <div class="bg-red-50 border border-red-200 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 text-red-800">🚨 National Crisis Resources</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-semibold text-red-800">National Suicide Prevention Lifeline</h4>
+                                <p class="text-lg font-bold text-red-600">988</p>
+                                <p class="text-sm text-red-700">Available 24/7, free and confidential</p>
+                            </div>
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-semibold text-red-800">Crisis Text Line</h4>
+                                <p class="text-lg font-bold text-red-600">Text HOME to 741741</p>
+                                <p class="text-sm text-red-700">Text-based crisis support</p>
+                            </div>
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-semibold text-red-800">Emergency Services</h4>
+                                <p class="text-lg font-bold text-red-600">911</p>
+                                <p class="text-sm text-red-700">For immediate emergency assistance</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Government Mental Health Resources -->
+                    <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">🏛️ Government Mental Health Resources</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold text-blue-800">SAMHSA National Helpline</h4>
+                                <p class="text-lg font-bold text-blue-600">1-800-662-HELP (4357)</p>
+                                <p class="text-sm text-blue-700">Treatment referral and information service</p>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold text-blue-800">MentalHealth.gov</h4>
+                                <p class="text-sm text-blue-700">Official government mental health information</p>
+                                <a href="https://www.mentalhealth.gov" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold">Visit Website →</a>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold text-blue-800">CDC Mental Health</h4>
+                                <p class="text-sm text-blue-700">Centers for Disease Control mental health resources</p>
+                                <a href="https://www.cdc.gov/mentalhealth" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold">Visit Website →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Government Support -->
+                <div class="mt-6 bg-green-50 border border-green-200 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-green-800">📞 Additional Support Lines</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-green-800">Veterans Crisis Line</h4>
+                            <p class="text-lg font-bold text-green-600">1-800-273-8255</p>
+                            <p class="text-sm text-green-700">Press 1 for veterans and their families</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-800">Disaster Distress Helpline</h4>
+                            <p class="text-lg font-bold text-green-600">1-800-985-5990</p>
+                            <p class="text-sm text-green-700">For those affected by disasters</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-800">LGBTQ+ Crisis Support</h4>
+                            <p class="text-lg font-bold text-green-600">1-866-488-7386</p>
+                            <p class="text-sm text-green-700">Trevor Project for LGBTQ+ youth</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-800">Eating Disorders Helpline</h4>
+                            <p class="text-lg font-bold text-green-600">1-800-931-2237</p>
+                            <p class="text-sm text-green-700">National Eating Disorders Association</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Information -->
+        <div class="space-y-6">
+            <!-- Counselor Information -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">👨‍⚕️ Our Counselors</h3>
+                <div class="space-y-4">
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <h4 class="font-semibold">Licensed Professionals</h4>
+                        <p class="text-sm text-gray-600">All counselors are certified and experienced in student mental health</p>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4">
+                        <h4 class="font-semibold">Confidential Support</h4>
+                        <p class="text-sm text-gray-600">Your privacy is protected. All conversations are confidential</p>
+                    </div>
+                    <div class="border-l-4 border-purple-500 pl-4">
+                        <h4 class="font-semibold">24/7 Response</h4>
+                        <p class="text-sm text-gray-600">We aim to respond within 24 hours</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Response Time -->
+            <div class="bg-green-50 border border-green-200 p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-3 text-green-800">⏰ Response Times</h3>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span>Urgent requests:</span>
+                        <span class="font-semibold">Within 2 hours</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>High priority:</span>
+                        <span class="font-semibold">Within 6 hours</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Medium priority:</span>
+                        <span class="font-semibold">Within 24 hours</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Low priority:</span>
+                        <span class="font-semibold">Within 48 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Information -->
+            <div class="bg-red-50 border border-red-200 p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-3 text-red-800">🚨 Emergency Support</h3>
+                <p class="text-sm text-red-700 mb-3">If you're in crisis or need immediate help:</p>
+                <div class="space-y-2 text-sm">
+                    <p><strong>National Suicide Prevention Lifeline:</strong><br>988</p>
+                    <p><strong>Crisis Text Line:</strong><br>Text HOME to 741741</p>
+                    <p><strong>Emergency Services:</strong><br>911</p>
+                </div>
+            </div>
+
+            <!-- Alternative Resources -->
+            <div class="bg-gray-50 p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-3 text-gray-800">📚 While You Wait</h3>
+                <div class="space-y-3">
+                    <a href="{{ url_for('resources') }}" class="block text-blue-600 hover:text-blue-800 text-sm">
+                        → Browse Mental Health Resources
+                    </a>
+                    <a href="{{ url_for('videos') }}" class="block text-blue-600 hover:text-blue-800 text-sm">
+                        → Watch Wellness Videos
+                    </a>
+                    <a href="{{ url_for('mood_tracker') }}" class="block text-blue-600 hover:text-blue-800 text-sm">
+                        → Track Your Mood
+                    </a>
+                    <a href="{{ url_for('goals') }}" class="block text-blue-600 hover:text-blue-800 text-sm">
+                        → Set Wellness Goals
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Information -->
+    <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold mb-4 text-gray-800">What to Expect</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h4 class="font-semibold mb-2">📧 Initial Response</h4>
+                <p class="text-gray-600 text-sm">A counselor will review your message and respond with personalized guidance, resources, or schedule a session if needed.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2">🤝 Follow-up Support</h4>
+                <p class="text-gray-600 text-sm">Depending on your needs, you may be offered ongoing support, referrals to specialists, or additional resources.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

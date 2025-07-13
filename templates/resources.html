@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+
+{% block title %}Resources - Mental Wellness Portal{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Header -->
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Mental Health Resources</h1>
+        <p class="text-lg text-gray-600">Access helpful articles, tools, and information to support your mental wellness journey</p>
+    </div>
+
+    <!-- YouTube-Style Video Content Section -->
+    <div class="bg-gradient-to-r from-red-500 to-red-600 text-white p-8 rounded-lg">
+        <h2 class="text-3xl font-bold mb-6">📺 Mental Wellness Videos & Content</h2>
+        <p class="text-xl mb-8">Curated video content to support your mental health journey</p>
+    </div>
+
+    <!-- Featured Video Section -->
+    <div class="bg-white p-8 rounded-lg shadow-md">
+        <h3 class="text-2xl font-bold mb-6 text-gray-800">🎬 Featured Mental Wellness Videos</h3>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Video Card 1 -->
+            <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                <div class="aspect-video bg-gray-200 flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🧘</div>
+                        <p class="text-sm text-gray-600">Mindfulness for Students</p>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h4 class="font-semibold text-lg mb-2">5-Minute Meditation for Stress Relief</h4>
+                    <p class="text-sm text-gray-600 mb-3">Quick meditation techniques perfect for busy students</p>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs text-gray-500">Duration: 5:30</span>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Beginner</span>
+                    </div>
+                    <a href="{{ url_for('videos') }}" class="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300 text-center block font-semibold">
+                        Watch
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video Card 2 -->
+            <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                <div class="aspect-video bg-gray-200 flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">😴</div>
+                        <p class="text-sm text-gray-600">Sleep & Wellness</p>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h4 class="font-semibold text-lg mb-2">Better Sleep Habits for Students</h4>
+                    <p class="text-sm text-gray-600 mb-3">Science-backed tips for improving sleep quality</p>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs text-gray-500">Duration: 8:15</span>
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Intermediate</span>
+                    </div>
+                    <a href="{{ url_for('videos') }}" class="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300 text-center block font-semibold">
+                        Watch
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video Card 3 -->
+            <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                <div class="aspect-video bg-gray-200 flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">💪</div>
+                        <p class="text-sm text-gray-600">Building Resilience</p>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h4 class="font-semibold text-lg mb-2">How to Build Mental Resilience</h4>
+                    <p class="text-sm text-gray-600 mb-3">Strategies to bounce back from academic stress</p>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs text-gray-500">Duration: 12:45</span>
+                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Advanced</span>
+                    </div>
+                    <a href="{{ url_for('videos') }}" class="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300 text-center block font-semibold">
+                        Watch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Playlists Section -->
+    <div class="bg-white p-8 rounded-lg shadow-md">
+        <h3 class="text-2xl font-bold mb-6 text-gray-800">📚 Mental Wellness Playlists</h3>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Playlist 1 -->
+            <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="text-3xl mr-3">🎵</div>
+                    <div>
+                        <h4 class="font-semibold text-lg">Anxiety Management Series</h4>
+                        <p class="text-sm text-gray-600">6 videos • 45 minutes total</p>
+                    </div>
+                </div>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li>• Understanding Anxiety Triggers</li>
+                    <li>• Breathing Techniques for Panic Attacks</li>
+                    <li>• Cognitive Behavioral Therapy Basics</li>
+                    <li>• Progressive Muscle Relaxation</li>
+                    <li>• Mindfulness for Anxiety</li>
+                    <li>• Building a Support System</li>
+                </ul>
+                <button class="mt-4 w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">
+                    Watch Playlist
+                </button>
+            </div>
+
+            <!-- Playlist 2 -->
+            <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition duration-300">
+                <div class="flex items-center mb-4">
+                    <div class="text-3xl mr-3">📖</div>
+                    <div>
+                        <h4 class="font-semibold text-lg">Student Life Balance</h4>
+                        <p class="text-sm text-gray-600">8 videos • 60 minutes total</p>
+                    </div>
+                </div>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li>• Time Management Strategies</li>
+                    <li>• Setting Healthy Boundaries</li>
+                    <li>• Social Life vs Academic Life</li>
+                    <li>• Dealing with FOMO</li>
+                    <li>• Self-Care for Students</li>
+                    <li>• Building Healthy Relationships</li>
+                    <li>• Financial Stress Management</li>
+                    <li>• Career Planning Without Overwhelm</li>
+                </ul>
+                <button class="mt-4 w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">
+                    Watch Playlist
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Sessions & Webinars -->
+    <div class="bg-white p-8 rounded-lg shadow-md">
+        <h3 class="text-2xl font-bold mb-6 text-gray-800">🎥 Live Sessions & Webinars</h3>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Live Session 1 -->
+            <div class="bg-gradient-to-br from-purple-500 to-pink-500 text-white p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <div class="w-3 h-3 bg-red-400 rounded-full animate-pulse mr-2"></div>
+                    <span class="text-sm font-semibold">LIVE NOW</span>
+                </div>
+                <h4 class="font-semibold text-lg mb-2">Weekly Q&A with Dr. Sarah Chen</h4>
+                <p class="text-sm opacity-90 mb-4">Get your mental health questions answered by a licensed psychologist</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs">Every Saturday, 7 PM EST</span>
+                    <button class="bg-white text-purple-600 px-3 py-1 rounded text-sm font-semibold">
+                        Join Live
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upcoming Session -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h4 class="font-semibold text-lg mb-2">Upcoming: Exam Stress Workshop</h4>
+                <p class="text-sm text-gray-600 mb-4">Learn techniques to manage exam anxiety and perform your best</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-gray-500">Tomorrow, 6 PM EST</span>
+                    <button class="bg-blue-600 text-white px-3 py-1 rounded text-sm font-semibold">
+                        Set Reminder
+                    </button>
+                </div>
+            </div>
+
+            <!-- Past Session -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h4 class="font-semibold text-lg mb-2">Past: Building Self-Confidence</h4>
+                <p class="text-sm text-gray-600 mb-4">Recorded session on developing self-esteem and confidence</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-gray-500">Available Now</span>
+                    <button class="bg-green-600 text-white px-3 py-1 rounded text-sm font-semibold">
+                        Watch Replay
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filter -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="flex flex-col md:flex-row gap-4">
+            <input type="text" placeholder="Search videos and content..." 
+                   class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">All Categories</option>
+                <option value="anxiety">Anxiety</option>
+                <option value="depression">Depression</option>
+                <option value="stress">Stress Management</option>
+                <option value="mindfulness">Mindfulness</option>
+                <option value="self-care">Self-Care</option>
+                <option value="sleep">Sleep</option>
+                <option value="relationships">Relationships</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Featured Resources -->
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8 rounded-lg">
+        <h2 class="text-3xl font-bold mb-6">🌟 Featured Resources</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white bg-opacity-20 p-6 rounded-lg">
+                <div class="text-3xl mb-3">🧘</div>
+                <h3 class="text-xl font-bold mb-2">Mindfulness Basics</h3>
+                <p class="mb-4">Learn fundamental mindfulness techniques to reduce stress and improve focus.</p>
+                <a href="#" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                    Read More
+                </a>
+            </div>
+            <div class="bg-white bg-opacity-20 p-6 rounded-lg">
+                <div class="text-3xl mb-3">😴</div>
+                <h3 class="text-xl font-bold mb-2">Sleep Hygiene</h3>
+                <p class="mb-4">Improve your sleep quality with evidence-based strategies and tips.</p>
+                <a href="#" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                    Read More
+                </a>
+            </div>
+            <div class="bg-white bg-opacity-20 p-6 rounded-lg">
+                <div class="text-3xl mb-3">💪</div>
+                <h3 class="text-xl font-bold mb-2">Building Resilience</h3>
+                <p class="mb-4">Develop emotional resilience to better handle life's challenges.</p>
+                <a href="#" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                    Read More
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resource Categories -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Anxiety Resources -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="text-4xl mb-4">😰</div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Anxiety Management</h3>
+            <div class="space-y-3">
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Understanding Anxiety</h4>
+                    <p class="text-sm text-gray-600">Learn about different types of anxiety and their symptoms</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Coping Strategies</h4>
+                    <p class="text-sm text-gray-600">Practical techniques to manage anxiety in daily life</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Breathing Exercises</h4>
+                    <p class="text-sm text-gray-600">Simple breathing techniques for immediate relief</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Depression Resources -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="text-4xl mb-4">😔</div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Depression Support</h3>
+            <div class="space-y-3">
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Recognizing Depression</h4>
+                    <p class="text-sm text-gray-600">Signs and symptoms to watch for</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Self-Care Strategies</h4>
+                    <p class="text-sm text-gray-600">Daily practices to improve mood and energy</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">When to Seek Help</h4>
+                    <p class="text-sm text-gray-600">Guidance on professional support</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Stress Management -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="text-4xl mb-4">😤</div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Stress Management</h3>
+            <div class="space-y-3">
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Academic Stress</h4>
+                    <p class="text-sm text-gray-600">Managing pressure from studies and exams</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Time Management</h4>
+                    <p class="text-sm text-gray-600">Balancing responsibilities effectively</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Relaxation Techniques</h4>
+                    <p class="text-sm text-gray-600">Quick ways to reduce stress</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Mindfulness & Meditation -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="text-4xl mb-4">🧘‍♀️</div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Mindfulness & Meditation</h3>
+            <div class="space-y-3">
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Meditation Basics</h4>
+                    <p class="text-sm text-gray-600">Getting started with meditation</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Mindful Living</h4>
+                    <p class="text-sm text-gray-600">Incorporating mindfulness into daily life</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Guided Sessions</h4>
+                    <p class="text-sm text-gray-600">Audio-guided meditation practices</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Self-Care -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="text-4xl mb-4">💖</div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Self-Care</h3>
+            <div class="space-y-3">
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Self-Care Routines</h4>
+                    <p class="text-sm text-gray-600">Building healthy daily habits</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Physical Wellness</h4>
+                    <p class="text-sm text-gray-600">Exercise and nutrition for mental health</p>
+                </a>
+                <a href="#" class="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                    <h4 class="font-semibold">Social Connection</h4>
+                    <p class="text-sm text-gray-600">Building and maintaining relationships</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Crisis Resources -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="text-4xl mb-4">🚨</div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Crisis Support</h3>
+            <div class="space-y-3">
+                <a href="#" class="block p-3 bg-red-50 rounded-lg hover:bg-red-100 transition duration-300">
+                    <h4 class="font-semibold text-red-800">Emergency Contacts</h4>
+                    <p class="text-sm text-red-600">Immediate help when you need it</p>
+                </a>
+                <a href="#" class="block p-3 bg-red-50 rounded-lg hover:bg-red-100 transition duration-300">
+                    <h4 class="font-semibold text-red-800">Crisis Intervention</h4>
+                    <p class="text-sm text-red-600">What to do in a mental health crisis</p>
+                </a>
+                <a href="#" class="block p-3 bg-red-50 rounded-lg hover:bg-red-100 transition duration-300">
+                    <h4 class="font-semibold text-red-800">Supporting Others</h4>
+                    <p class="text-sm text-red-600">How to help friends in crisis</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Tools -->
+    <div class="bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-3xl font-bold mb-6 text-gray-800">🛠️ Interactive Tools</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="text-center p-6 bg-blue-50 rounded-lg">
+                <div class="text-4xl mb-4">📊</div>
+                <h3 class="font-semibold mb-2">Mood Tracker</h3>
+                <p class="text-sm text-gray-600 mb-4">Track your daily mood and identify patterns</p>
+                <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                    Start Tracking
+                </a>
+            </div>
+            
+            <div class="text-center p-6 bg-green-50 rounded-lg">
+                <div class="text-4xl mb-4">🎯</div>
+                <h3 class="font-semibold mb-2">Goal Setter</h3>
+                <p class="text-sm text-gray-600 mb-4">Set and track mental wellness goals</p>
+                <a href="#" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                    Set Goals
+                </a>
+            </div>
+            
+            <div class="text-center p-6 bg-purple-50 rounded-lg">
+                <div class="text-4xl mb-4">📝</div>
+                <h3 class="font-semibold mb-2">Journal</h3>
+                <p class="text-sm text-gray-600 mb-4">Reflect on your thoughts and feelings</p>
+                <a href="#" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-300">
+                    Start Journaling
+                </a>
+            </div>
+            
+            <div class="text-center p-6 bg-orange-50 rounded-lg">
+                <div class="text-4xl mb-4">🧘</div>
+                <h3 class="font-semibold mb-2">Breathing Timer</h3>
+                <p class="text-sm text-gray-600 mb-4">Guided breathing exercises</p>
+                <a href="#" class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition duration-300">
+                    Start Breathing
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Resources -->
+    <div class="bg-gray-50 p-8 rounded-lg">
+        <h2 class="text-3xl font-bold mb-6 text-gray-800">🔗 External Resources</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-xl font-bold mb-4">Professional Organizations</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-blue-600 hover:text-blue-800">American Psychological Association</a></li>
+                    <li><a href="#" class="text-blue-600 hover:text-blue-800">National Alliance on Mental Illness</a></li>
+                    <li><a href="#" class="text-blue-600 hover:text-blue-800">MentalHealth.gov</a></li>
+                    <li><a href="#" class="text-blue-600 hover:text-blue-800">World Health Organization - Mental Health</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Educational Resources</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-blue-600 hover:text-blue-800">Khan Academy - Psychology</a></li>
+                    <li><a href="#" class="text-blue-600 hover:text-blue-800">Coursera - Mental Health Courses</a></li>
+                    <li><a href="#" class="text-blue-600 hover:text-blue-800">TED Talks - Mental Health</a></li>
+                    <li><a href="#" class="text-blue-600 hover:text-blue-800">Psychology Today</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

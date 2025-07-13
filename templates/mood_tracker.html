@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Mood Tracker - Mental Wellness Portal{% endblock %}
+
+{% block content %}
+<div class="min-h-[80vh] bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 py-10 px-2 flex flex-col items-center">
+    <div class="w-full max-w-3xl space-y-10">
+        <!-- Motivational Message -->
+        {% if motivational_msg %}
+        <div class="flex items-center justify-center">
+            <div class="bg-green-50 border-2 border-green-300 text-green-900 px-8 py-5 rounded-2xl shadow-lg flex items-center gap-4 w-full text-lg font-semibold">
+                <span class="text-3xl">🌟</span>
+                <span>{{ motivational_msg }}</span>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-10 rounded-2xl shadow-xl text-center">
+            <h1 class="text-4xl font-extrabold mb-2 tracking-tight">📊 Mood Tracker</h1>
+            <p class="text-lg opacity-90">Track your daily mood and emotional patterns to better understand your mental wellness journey.</p>
+        </div>
+
+        <!-- Mood Entry Form -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg border border-purple-100">
+            <h2 class="text-2xl font-bold mb-6 text-purple-700 text-center">How are you feeling today?</h2>
+            <form method="POST" action="{{ url_for('submit_mood') }}" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-4">Mood Level</label>
+                    <div class="grid grid-cols-5 gap-4">
+                        <div class="text-center">
+                            <input type="radio" id="mood1" name="mood_level" value="1" class="sr-only" required>
+                            <label for="mood1" class="block cursor-pointer">
+                                <div class="text-5xl mb-2 hover:scale-110 transition-transform">😢</div>
+                                <span class="text-xs text-gray-500">Very Low</span>
+                            </label>
+                        </div>
+                        <div class="text-center">
+                            <input type="radio" id="mood2" name="mood_level" value="2" class="sr-only">
+                            <label for="mood2" class="block cursor-pointer">
+                                <div class="text-5xl mb-2 hover:scale-110 transition-transform">😕</div>
+                                <span class="text-xs text-gray-500">Low</span>
+                            </label>
+                        </div>
+                        <div class="text-center">
+                            <input type="radio" id="mood3" name="mood_level" value="3" class="sr-only">
+                            <label for="mood3" class="block cursor-pointer">
+                                <div class="text-5xl mb-2 hover:scale-110 transition-transform">😐</div>
+                                <span class="text-xs text-gray-500">Neutral</span>
+                            </label>
+                        </div>
+                        <div class="text-center">
+                            <input type="radio" id="mood4" name="mood_level" value="4" class="sr-only">
+                            <label for="mood4" class="block cursor-pointer">
+                                <div class="text-5xl mb-2 hover:scale-110 transition-transform">🙂</div>
+                                <span class="text-xs text-gray-500">Good</span>
+                            </label>
+                        </div>
+                        <div class="text-center">
+                            <input type="radio" id="mood5" name="mood_level" value="5" class="sr-only">
+                            <label for="mood5" class="block cursor-pointer">
+                                <div class="text-5xl mb-2 hover:scale-110 transition-transform">😄</div>
+                                <span class="text-xs text-gray-500">Excellent</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="mood_note" class="block text-sm font-medium text-gray-700 mb-2">Notes (Optional)</label>
+                    <textarea id="mood_note" name="mood_note" rows="3"
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 bg-purple-50"
+                              placeholder="How are you feeling? What's on your mind?"></textarea>
+                </div>
+                <button type="submit" 
+                        class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-4 rounded-lg hover:from-pink-500 hover:to-purple-500 transition duration-300 font-bold shadow-lg text-lg">
+                    Save Mood Entry
+                </button>
+            </form>
+        </div>
+
+        <!-- Mood History -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg border border-blue-100">
+            <h2 class="text-2xl font-bold mb-6 text-blue-700 text-center">Your Mood History</h2>
+            {% if mood_entries %}
+                <div class="space-y-4">
+                    {% for entry in mood_entries %}
+                    <div class="flex items-center p-4 bg-blue-50 rounded-xl shadow-sm border border-blue-200">
+                        <div class="text-4xl mr-4">
+                            {% if entry.mood_level == 1 %}😢{% elif entry.mood_level == 2 %}😕{% elif entry.mood_level == 3 %}😐{% elif entry.mood_level == 4 %}🙂{% elif entry.mood_level == 5 %}😄{% endif %}
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold text-blue-900">
+                                    {% if entry.mood_level == 1 %}Very Low Mood{% elif entry.mood_level == 2 %}Low Mood{% elif entry.mood_level == 3 %}Neutral Mood{% elif entry.mood_level == 4 %}Good Mood{% elif entry.mood_level == 5 %}Excellent Mood{% endif %}
+                                </h3>
+                                <span class="text-xs text-gray-500">
+                                    {{ entry.created_at.strftime('%b %d, %Y %I:%M %p') if entry.created_at else 'Unknown date' }}
+                                </span>
+                            </div>
+                            {% if entry.mood_note %}
+                                <p class="text-gray-700 mt-1 italic">“{{ entry.mood_note }}”</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-8">
+                    <div class="text-6xl mb-4">📊</div>
+                    <h3 class="text-xl font-semibold text-gray-600 mb-2">No mood entries yet</h3>
+                    <p class="text-gray-500">Start tracking your mood by submitting your first entry above!</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Mood Insights -->
+        <div class="bg-gradient-to-r from-blue-400 to-indigo-500 text-white p-8 rounded-2xl shadow-xl mt-4">
+            <h3 class="text-2xl font-bold mb-3 flex items-center gap-2"><span>💡</span> Mood Insights</h3>
+            <div class="space-y-2 text-lg">
+                <p>• Tracking your mood regularly helps identify patterns and triggers</p>
+                <p>• Notice what activities or situations improve your mood</p>
+                <p>• Share your mood patterns with counselors for better support</p>
+                <p>• Celebrate positive mood trends and progress</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Mood selection visual feedback
+document.querySelectorAll('input[name="mood_level"]').forEach((radio) => {
+    radio.addEventListener('change', function() {
+        // Reset all labels
+        document.querySelectorAll('label[for^="mood"]').forEach(label => {
+            label.style.transform = 'scale(1)';
+        });
+        
+        // Highlight selected mood
+        if (this.checked) {
+            const label = document.querySelector(`label[for="${this.id}"]`);
+            label.style.transform = 'scale(1.1)';
+        }
+    });
+});
+</script>
+{% endblock %} 
