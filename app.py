@@ -18,7 +18,7 @@ app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.config['SESSION_TYPE'] = 'filesystem'
 
 # MongoDB Setup
-client = MongoClient(os.getenv('MONGODB_URI', 'mongodb://localhost:27017/'))
+client = mongodb+srv://mentalUser:<PKSP$711>@cluster1.64hb1bb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1
 db = client['mental_wellness']
 users_collection = db['users']
 feedback_collection = db['feedback']
