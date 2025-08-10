@@ -10,6 +10,9 @@ import random
 
 load_dotenv()
 
+
+
+
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -545,5 +548,6 @@ def update_goal_progress():
     
     return jsonify({'success': True})
 
-if __name__ == '__main__':
-    app.run(debug=True) 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
