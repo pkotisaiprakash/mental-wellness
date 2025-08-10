@@ -17,8 +17,8 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.config['SESSION_TYPE'] = 'filesystem'
 
-# MongoDB Setup
-client = mongodb+srv://mentalUser:<PKSP$711>@cluster1.64hb1bb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1
+client = MongoClient(os.environ["MONGODB_URI"])
+
 db = client['mental_wellness']
 users_collection = db['users']
 feedback_collection = db['feedback']
