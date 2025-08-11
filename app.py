@@ -7,17 +7,10 @@ import os
 from datetime import datetime, timezone
 from dotenv import load_dotenv
 import random
-
 load_dotenv()
-
-
-
-
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.config['SESSION_TYPE'] = 'filesystem'
-
-
 
 client = ['mongodb+srv://mentalUser:<57XRTkXQJAtUgETz>@cluster1.64hb1bb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1']
 
