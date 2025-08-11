@@ -12,7 +12,11 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 app.config['SESSION_TYPE'] = 'filesystem'
 
-client = ['mongodb+srv://mentalUser:<57XRTkXQJAtUgETz>@cluster1.64hb1bb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1']
+mongo_uri = os.getenv("MONGO_URI")
+if not mongo_uri:
+    raise ValueError("MONGO_URI not found. Please set it in Railway environment variables.")
+
+client = MongoClient(mongo_uri)
 
 db = client['mental_wellness']
 users_collection = db['users']
