@@ -544,4 +544,5 @@ def update_goal_progress():
 
 if __name__ == "__main__":
     poRt = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=poRt,debug=True)
+    app.run(debug=True)
+    app.run(host="0.0.0.0", port=poRt)
